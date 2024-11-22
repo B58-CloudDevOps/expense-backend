@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo "Unit Testing! - 'npm test'"
 
   integration-testing:
     runs-on: self-hosted
@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo "Integrations Testing! - 'npm verify'"
       
   build-docker-image:
     needs: [unit-testing,integration-testing]
