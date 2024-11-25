@@ -28,6 +28,14 @@ jobs:
             secrets: |
                 infra-secrets/data/sonar password | sonar_password ;
 
+  printing pwd:
+    runs-on: self-hosted
+    needs: [compile]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo $sonar_password
+
   static-code-analysis:
     runs-on: self-hosted
     needs: [compile]
