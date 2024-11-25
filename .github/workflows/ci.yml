@@ -47,7 +47,6 @@ jobs:
   security-checks-sca:
     runs-on: self-hosted
     needs: [compile]
-    
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
