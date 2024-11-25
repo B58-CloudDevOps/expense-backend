@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
-        run: /sonar-scanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonar.expense.internal:9000 -Dsonar.projectKey=expense-backend -Dsonar.login=admin -Dsonar.password=${{ env.sonar_password }}
+        run: /sonar-scanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonar.expense.internal:9000 -Dsonar.projectKey=expense-backend -Dsonar.login=admin -Dsonar.password=Passw0rd@DevOps
 
   security-checks-sast:
     runs-on: self-hosted
