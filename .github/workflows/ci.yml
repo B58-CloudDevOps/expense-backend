@@ -26,7 +26,7 @@ jobs:
             token: ${{ secrets.VAULT_TOKEN }}
             tlsSkipVerify: true
             secrets: |
-                infra-secrets/data/sonar password | sonar_password ;
+                infra-secrets/data/sonarqube password | sonar_password ;
 
   printing-pwd:
     runs-on: self-hosted
