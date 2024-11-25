@@ -48,7 +48,7 @@ jobs:
 
   unit-testing:
     runs-on: self-hosted
-    needs: [security-checks-sca]
+    needs: [security-checks]
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
@@ -56,7 +56,7 @@ jobs:
 
   integration-testing:
     runs-on: self-hosted
-    needs: [security-checks-sca]
+    needs: [security-checks]
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
