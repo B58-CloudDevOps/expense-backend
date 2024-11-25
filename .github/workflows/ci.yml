@@ -13,13 +13,28 @@ jobs:
       - name: Run a one-line script
         run: hostname
 
+# Make sure you create gh secret to host the vault token
+  get-sonar-passwrd:
+    runs-on: self-hosted
+    needs: [compile]
+    steps:
+      - name: Import Secrets
+        id: import-secrets
+        uses: hashicorp/vault-action@v2
+        with:
+            url: https://vault.expense.internal:8200
+            token: ${{ secrets.VAULT_TOKEN }}
+            tlsSkipVerify: true
+            secrets: |
+                infra-secrets/data/sonar password | sonar_password ;
+
   static-code-analysis:
     runs-on: self-hosted
     needs: [compile]
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
-        run: /sonar-scanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonar.expense.internal:9000 -Dsonar.projectKey=expense-backend -Dsonar.login=admin -Dsonar.password=Passw0rd@DevOps
+        run: /sonar-scanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonar.expense.internal:9000 -Dsonar.projectKey=expense-backend -Dsonar.login=admin -Dsonar.password=${{env.sonar_password}}
 
   security-checks-sast:
     runs-on: self-hosted
