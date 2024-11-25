@@ -36,21 +36,15 @@ jobs:
       - name: Run a one-line script
         run: echo "/sonar-scanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonar.expense.internal:9000 -Dsonar.projectKey=expense-backend -Dsonar.login=admin -Dsonar.password=Passw0rd@DevOps -Dsonar.qualitygate.wait=true"
 
-  security-checks-sast:
+  security-checks:
     runs-on: self-hosted
     needs: [compile]
     steps:
       - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-  security-checks-sca:
-    runs-on: self-hosted
-    needs: [compile]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: SAST
+        run: echo "Running CheckMarx Scan"
+      - name: SCA
+        run: echo "Running CheckMarx SCA"
 
   unit-testing:
     runs-on: self-hosted
