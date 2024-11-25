@@ -30,7 +30,7 @@ jobs:
 
   printing-pwd:
     runs-on: self-hosted
-    needs: [compile]
+    needs: [get-sonar-passwrd]
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
