@@ -81,6 +81,15 @@ jobs:
             docker tag expense-backend:latest 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:latest
             docker push 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA}
 
+  scan-and-decide:
+    needs: [uploading-image]
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker push
+        run: |
+            aws ecr start-image-scan  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
+
   dev-deployment:
     runs-on: self-hosted
     needs: [uploading-image]
