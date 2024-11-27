@@ -78,9 +78,8 @@ jobs:
       - name: Docker push
         run: |
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 355449129696.dkr.ecr.us-east-1.amazonaws.com
-            docker tag expense-backend:latest 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA}
             docker push 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA}
-            sudo docker rmi -f 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA}
+            
 
   scan-and-decide:
     needs: [uploading-image]
@@ -93,6 +92,7 @@ jobs:
             aws ecr wait image-scan-complete  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
             COUNT=`aws ecr describe-image-scan-findings --repository-name expense-backend --image-id imageTag=0050d27b062e99ab0813d86d5cfb90b8c45607c2 --query 'imageScanFindings.findingSeverityCounts.CRITICAL'`
             if [ ${COUNT} -gt 0 ] ; then echo "CRITICAL FINDINGS ${COUNT} - Fix them" ; exit 1 ; fi 
+            sudo docker rmi -f 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA}
         
   dev-deployment:
     runs-on: self-hosted
