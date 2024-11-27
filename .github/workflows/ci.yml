@@ -93,7 +93,7 @@ jobs:
 
   dev-deployment:
     runs-on: self-hosted
-    needs: [uploading-image]
+    needs: [scan-and-decide]
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
