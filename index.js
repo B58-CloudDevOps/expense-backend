@@ -59,7 +59,7 @@ app.get('/transaction',(req,res)=>{
     }
 });
 
-//DELETE ALL TRANSACTIONS
+//DELETE ALL TRANSACTIONs
 app.delete('/transaction',(req,res)=>{
     try{
         transactionService.deleteAllTransactions(function(result){
