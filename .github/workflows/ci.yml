@@ -68,15 +68,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Budiling image
-        run: docker build -t 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:latest .
+        run: docker build -t 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA} .
 
   uploading-image:
     needs: [build-docker-image]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Docker push
+        run: |
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 355449129696.dkr.ecr.us-east-1.amazonaws.com
+            docker tag expense-backend:latest 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:latest
+            docker push 355449129696.dkr.ecr.us-east-1.amazonaws.com/expense-backend:${GITHUB_SHA}
 
   dev-deployment:
     runs-on: self-hosted
