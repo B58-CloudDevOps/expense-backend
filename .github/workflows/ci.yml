@@ -86,7 +86,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Docker push
+      - name: ECR Scan
         run: |
             aws ecr start-image-scan  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
             aws ecr wait image-scan-complete  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
@@ -100,8 +100,8 @@ jobs:
     needs: [scan-and-decide]
     steps:
       - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Authenticating to cluster
+        run: bash ./init.sh
 
   qa-deployment:
     runs-on: self-hosted
