@@ -89,6 +89,7 @@ jobs:
       - name: Docker push
         run: |
             aws ecr start-image-scan  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
+            aws ecr image-scan-complete  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
 
   dev-deployment:
     runs-on: self-hosted
