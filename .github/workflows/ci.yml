@@ -90,7 +90,9 @@ jobs:
         run: |
             aws ecr start-image-scan  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
             aws ecr wait image-scan-complete  --repository-name expense-backend --image-id imageTag=${GITHUB_SHA}
-
+            COUNT=`aws ecr describe-image-scan-findings --repository-name expense-backend --image-id imageTag=0050d27b062e99ab0813d86d5cfb90b8c45607c2 --query 'imageScanFindings.findingSeverityCounts.HIGH'`
+            if [ ${COUNT} -gt 0 ] ; then echo "CRITICAL FINDINGS - Fix them" ; exit 1 ; fi 
+        
   dev-deployment:
     runs-on: self-hosted
     needs: [scan-and-decide]

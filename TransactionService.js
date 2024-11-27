@@ -21,7 +21,7 @@ function addTransaction(amount, desc) {
         }
         console.log("Transaction added successfully.");
     });
-    return 200; // Consider changing to proper async handling or callback pattern
+    return 200; // Consider changing to proper async handling or callback patterns
 }
 
 
