@@ -1,4 +1,4 @@
-FROM            docker.io/node:20-alpine3.19
+FROM            docker.io/node:20.18.1-slim
 RUN             useradd expense 
 RUN             mkdir /app 
 COPY            *.js package.json /app/ 
