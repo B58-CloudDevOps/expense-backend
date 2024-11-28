@@ -110,7 +110,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Authenticating to cluster
-        run: bash ./init.sh qa
+        run: echo "bash ./init.sh qa"
 
   functional-testing:
     runs-on: self-hosted
