@@ -29,7 +29,7 @@ function getAllTransactions(callback){
     var mysql = "SELECT * FROM transactions";
     con.query(mysql, function(err,result){
         if (err) throw err;
-        //console.log("Getting all transactions...");
+        //console.log("Getting all transactions.");
         return(callback(result));
     });
 }
