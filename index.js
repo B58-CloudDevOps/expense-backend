@@ -76,7 +76,7 @@ app.delete('/transaction',(req,res)=>{
 //DELETE ONE TRANSACTION
 app.delete('/transaction/id', (req,res)=>{
     try{
-        //probably need to do some kind of parameter checking.
+        //probably need to do some kind of parameter check.
         transactionService.deleteTransactionById(req.body.id, function(result){
             res.statusCode = 200;
             res.json({message: `transaction with id ${req.body.id} seemingly deleted`});

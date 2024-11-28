@@ -100,8 +100,13 @@ jobs:
     needs: [scan-and-decide]
     steps:
       - uses: actions/checkout@v4
-      - name: Authenticating to cluster
-        run: bash ./init.sh dev
+      - name: Checkout expense-helm repo 
+        uses: actions/checkout@v4
+        with:
+          repository: b58-clouddevops/expense-helm
+          path: ./
+      - name: Authenticating and Deployment to cluster
+        run: bash ./init.sh dev backend
 
   qa-deployment:
     runs-on: self-hosted
@@ -135,6 +140,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Authenticating to cluster
-        run: bash ./init.sh prod
+        run: echo "bash ./init.sh prod"
 
 # Test Comment
