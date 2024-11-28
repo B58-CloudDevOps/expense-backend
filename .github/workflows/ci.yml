@@ -106,7 +106,7 @@ jobs:
           repository: b58-clouddevops/expense-helm
           path: ./
       - name: Authenticating and Deployment to cluster
-        run: bash ./deploy.sh dev backend
+        run: bash ./deploy.sh dev backend ${GITHUB_SHA}
 
   qa-deployment:
     runs-on: self-hosted

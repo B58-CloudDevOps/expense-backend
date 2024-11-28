@@ -73,7 +73,7 @@ app.delete('/transaction',(req,res)=>{
     }
 });
 
-//DELETE ONE TRANSACTION
+//DELETE ONE TRANSACTIONs
 app.delete('/transaction/id', (req,res)=>{
     try{
         //probably need to do some kind of parameter check.
