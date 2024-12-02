@@ -5,4 +5,4 @@ COPY            *.js package.json /app/
 WORKDIR         /app 
 RUN             npm install 
 ENTRYPOINT      [ "node" , "/app/index.js" ]
-# This is a Slim Image with no vuls
+# This is a Slim Image with no vulens
